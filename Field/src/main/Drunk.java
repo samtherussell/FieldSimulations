@@ -3,6 +3,8 @@ package main;
 import java.awt.Point;
 import java.util.Random;
 
+import test.Progress;
+
 import general.FieldObject;
 
 public class Drunk extends FieldObject {
@@ -21,10 +23,11 @@ public class Drunk extends FieldObject {
 		int w = 0;
 		int e = 0;
 		
+		Progress pb = new Progress();
 		for(int n = 0; n < steps; n++){
+			
+			pb.incrementProgress();
 			int rand = r.nextInt(4);
-			
-			
 			
 			switch(rand){
 			case 0:
@@ -45,13 +48,9 @@ public class Drunk extends FieldObject {
 				break;
 			}
 			
-			try{
-				field.move(this, rand);
-			}catch(ArrayIndexOutOfBoundsException err){
-				System.out.println("hit the fence");
-			}
+			super.go(steps, where, rand);
 			
-			//System.out.println(field.StringDisplay());
+			
 		}
 		System.out.println( "N:"+no + "\tS:"+s + "\tW:"+w + "\tE:"+e);
 		return field.findObject(this);
